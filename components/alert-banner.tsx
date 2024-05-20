@@ -1,9 +1,9 @@
 "use client";
 
-import { useRouter } from "next/navigation";
-import { useSyncExternalStore, useTransition } from "react";
+import {useRouter} from "next/navigation";
+import {useSyncExternalStore, useTransition} from "react";
 
-import { disableDraftMode } from "./actions";
+import {disableDraftMode} from "../app/blog/actions";
 
 const emptySubscribe = () => () => {};
 
@@ -14,7 +14,7 @@ export default function AlertBanner() {
   const shouldShow = useSyncExternalStore(
     emptySubscribe,
     () => window.top === window,
-    () => false,
+    () => false
   );
 
   if (!shouldShow) return null;
@@ -37,7 +37,7 @@ export default function AlertBanner() {
                 startTransition(() =>
                   disableDraftMode().then(() => {
                     router.refresh();
-                  }),
+                  })
                 )
               }
               className="hover:text-cyan underline transition-colors duration-200"

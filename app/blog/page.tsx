@@ -1,19 +1,19 @@
 import Link from "next/link";
-import { Suspense } from "react";
+import {Suspense} from "react";
 
-import Avatar from "./avatar";
-import CoverImage from "./cover-image";
-import DateComponent from "./date";
-import MoreStories from "./more-stories";
-import Onboarding from "./onboarding";
-import PortableText from "./portable-text";
+import Avatar from "../../components/avatar";
+import CoverImage from "../../components/cover-image";
+import DateComponent from "../../components/date";
+import MoreStories from "../../components/more-stories";
+import Onboarding from "../../components/onboarding";
+import PortableText from "../../components/portable-text";
 
-import type { HeroQueryResult, SettingsQueryResult } from "@/sanity.types";
+import type {HeroQueryResult, SettingsQueryResult} from "@/sanity.types";
 import * as demo from "@/sanity/lib/demo";
-import { sanityFetch } from "@/sanity/lib/fetch";
-import { heroQuery, settingsQuery } from "@/sanity/lib/queries";
+import {sanityFetch} from "@/sanity/lib/fetch";
+import {heroQuery, settingsQuery} from "@/sanity/lib/queries";
 
-function Intro(props: { title: string | null | undefined; description: any }) {
+function Intro(props: {title: string | null | undefined; description: any}) {
   const title = props.title || demo.title;
   const description = props.description?.length
     ? props.description
@@ -78,7 +78,7 @@ export default async function Page() {
     sanityFetch<SettingsQueryResult>({
       query: settingsQuery,
     }),
-    sanityFetch<HeroQueryResult>({ query: heroQuery }),
+    sanityFetch<HeroQueryResult>({query: heroQuery}),
   ]);
 
   return (

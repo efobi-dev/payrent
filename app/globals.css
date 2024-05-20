@@ -1,3 +1,126 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 42 37% 98%;
+    --foreground: 42 70% 0%;
+    --muted: 222 12% 95%;
+    --muted-foreground: 222 2% 32%;
+    --popover: 42 37% 98%;
+    --popover-foreground: 42 70% 0%;
+    --card: 42 37% 98%;
+    --card-foreground: 42 70% 0%;
+    --border: 42 8% 89%;
+    --input: 42 8% 89%;
+    --primary: 42 92% 62%;
+    --primary-foreground: 42 92% 2%;
+    --secondary: 222 92% 62%;
+    --secondary-foreground: 0 0% 100%;
+    --accent: 222 92% 62%;
+    --accent-foreground: 0 0% 100%;
+    --destructive: 3 95% 24%;
+    --destructive-foreground: 3 95% 84%;
+    --ring: 42 92% 62%;
+    --radius: 0.5rem;
+  }
+
+  .dark {
+    --background: 42 34% 0%;
+    --foreground: 42 17% 100%;
+    --muted: 222 12% 5%;
+    --muted-foreground: 222 2% 68%;
+    --popover: 42 34% 0%;
+    --popover-foreground: 42 17% 100%;
+    --card: 42 34% 0%;
+    --card-foreground: 42 17% 100%;
+    --border: 42 8% 15%;
+    --input: 42 8% 15%;
+    --primary: 42 92% 62%;
+    --primary-foreground: 42 92% 2%;
+    --secondary: 222 92% 62%;
+    --secondary-foreground: 0 0% 100%;
+    --accent: 222 92% 62%;
+    --accent-foreground: 0 0% 100%;
+    --destructive: 3 95% 53%;
+    --destructive-foreground: 0 0% 100%;
+    --ring: 42 92% 62%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+  }
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+/* HeroCards background shadow */
+.shadow {
+  position: absolute;
+  background: hsl(var(--primary) / 0%);
+  border-radius: 24px;
+  rotate: 35deg;
+
+  width: 260px;
+  top: 200px;
+  height: 400px;
+  filter: blur(150px);
+  animation: shadow-slide infinite 4s linear alternate;
+}
+
+@keyframes shadow-slide {
+  from {
+    background: hsl(var(--primary) / 20%);
+    right: 460px;
+  }
+  to {
+    background: hsl(var(--primary) / 80%);
+    right: 160px;
+  }
+}
+
+@media (max-width: 1024px) {
+  .shadow {
+    top: 70px;
+  }
+
+  @keyframes shadow-slide {
+    from {
+      background: hsl(var(--primary) / 20%);
+      right: 460px;
+    }
+    to {
+      background: hsl(var(--primary) / 50%);
+      right: 160px;
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .shadow {
+    top: 70px;
+    width: 100px;
+    height: 350px;
+    filter: blur(60px);
+  }
+
+  @keyframes shadow-slide {
+    from {
+      background: hsl(var(--primary) / 20%);
+      right: 280px;
+    }
+    to {
+      background: hsl(var(--primary) / 30%);
+      right: 100px;
+    }
+  }
+}
