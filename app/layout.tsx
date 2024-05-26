@@ -1,8 +1,10 @@
-import type {Metadata} from "next";
-import {Analytics} from "@vercel/analytics/react";
-import {ThemeProvider} from "@/lib/providers";
-import {Raleway as FontSans} from "next/font/google";
-import {cn} from "@/lib/utils";
+import type { Metadata } from "next";
+import { Analytics } from "@vercel/analytics/react";
+import { Navbar } from "@/components/NavBar";
+import { ThemeProvider } from "@/lib/providers";
+import { Manrope as FontSans } from "next/font/google";
+import { ScrollToTop } from "@/components/ScrollToTop";
+import { cn } from "@/lib/utils";
 import "./globals.css";
 
 const fontSans = FontSans({
@@ -24,10 +26,15 @@ export const metadata: Metadata = {
 
 export default function RootLayout({
   children,
-}: Readonly<{children: React.ReactNode}>) {
+}: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className={cn("min-h-screen bg-background", fontSans.variable)}>
+      <body
+        className={cn(
+          "flex min-h-[100dvh] flex-col bg-background",
+          fontSans.variable
+        )}
+      >
         <ThemeProvider
           attribute="class"
           defaultTheme="system"
@@ -35,7 +42,9 @@ export default function RootLayout({
           disableTransitionOnChange
         >
           <Analytics />
+          <Navbar />
           {children}
+          <ScrollToTop />
         </ThemeProvider>
       </body>
     </html>
