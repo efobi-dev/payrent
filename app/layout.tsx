@@ -17,10 +17,10 @@ export const metadata: Metadata = {
     template: "%s | PayRent",
     default: "PayRent",
   },
-  description: "",
+  description: "One Stop Real Estate Solution Provider in Nigeria",
   metadataBase: new URL("https://www.payrentng.com"),
   openGraph: {
-    images: "",
+    images: "/opengraph.jpg",
   },
 };
 
