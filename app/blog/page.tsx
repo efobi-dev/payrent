@@ -1,5 +1,5 @@
 import Link from "next/link";
-import {Suspense} from "react";
+import { Suspense } from "react";
 
 import Avatar from "../../components/avatar";
 import CoverImage from "../../components/cover-image";
@@ -8,12 +8,12 @@ import MoreStories from "../../components/more-stories";
 import Onboarding from "../../components/onboarding";
 import PortableText from "../../components/portable-text";
 
-import type {HeroQueryResult, SettingsQueryResult} from "@/sanity.types";
+import type { HeroQueryResult, SettingsQueryResult } from "@/sanity.types";
 import * as demo from "@/sanity/lib/demo";
-import {sanityFetch} from "@/sanity/lib/fetch";
-import {heroQuery, settingsQuery} from "@/sanity/lib/queries";
+import { sanityFetch } from "@/sanity/lib/fetch";
+import { heroQuery, settingsQuery } from "@/sanity/lib/queries";
 
-function Intro(props: {title: string | null | undefined; description: any}) {
+function Intro(props: { title: string | null | undefined; description: any }) {
   const title = props.title || demo.title;
   const description = props.description?.length
     ? props.description
@@ -46,13 +46,13 @@ function HeroPost({
 >) {
   return (
     <article>
-      <Link className="group mb-8 block md:mb-16" href={`/posts/${slug}`}>
+      <Link className="group mb-8 block md:mb-16" href={`/blog/posts/${slug}`}>
         <CoverImage image={coverImage} priority />
       </Link>
       <div className="mb-20 md:mb-28 md:grid md:grid-cols-2 md:gap-x-16 lg:gap-x-8">
         <div>
           <h3 className="text-pretty mb-4 text-4xl leading-tight lg:text-6xl">
-            <Link href={`/posts/${slug}`} className="hover:underline">
+            <Link href={`/blog/posts/${slug}`} className="hover:underline">
               {title}
             </Link>
           </h3>
@@ -78,7 +78,7 @@ export default async function Page() {
     sanityFetch<SettingsQueryResult>({
       query: settingsQuery,
     }),
-    sanityFetch<HeroQueryResult>({query: heroQuery}),
+    sanityFetch<HeroQueryResult>({ query: heroQuery }),
   ]);
 
   return (

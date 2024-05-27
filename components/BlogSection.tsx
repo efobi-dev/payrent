@@ -6,31 +6,24 @@ import Link from "next/link";
 
 const blogList = [
   {
-    href: "/blog/8-money-management-tips",
+    href: "/blog/posts/8-money-management-tips",
     src: "/money-management.jpg",
     title: "8 Money Management Tips",
     description:
       "Learn practical strategies to take control of your finances and achieve your financial goals.",
   },
   {
-    href: "/blog/best-investment-strategies",
-    src: "https://images.unsplash.com/photo-1434626881859-194d67b2b86f",
-    title: "Best Investment Strategies for Beginners",
+    href: "/blog/posts/welcome-to-payrent",
+    src: "/opengraph.jpg",
+    title: "Welcome to PayRent!",
     description:
-      "Discover the top investment strategies suitable for beginners looking to build wealth and secure their financial future.",
-  },
-  {
-    href: "/blog/credit-score-importance",
-    src: "https://images.unsplash.com/photo-1526628953301-3e589a6a8b74",
-    title: "The Importance of a Good Credit Score",
-    description:
-      "Understand why maintaining a good credit score is crucial and how it can impact various aspects of your financial life.",
+      "A concise description of our mission, vision and goals as a top real estate solution.",
   },
 ];
 
 export default function BlogSection() {
   return (
-    <section className="w-full bg-white py-12 md:py-24 lg:py-32 dark:bg-gray-950">
+    <section className="w-full py-12 md:py-24 lg:py-32">
       <div className="container mx-auto max-w-6xl px-4 md:px-6 lg:px-8">
         <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
           <div>
