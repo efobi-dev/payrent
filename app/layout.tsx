@@ -4,6 +4,9 @@ import { Navbar } from "@/components/NavBar";
 import { ThemeProvider } from "@/lib/providers";
 import { Manrope as FontSans } from "next/font/google";
 import { ScrollToTop } from "@/components/ScrollToTop";
+import { ClerkProvider } from "@clerk/nextjs";
+import { Toaster } from "@/components/ui/sonner";
+import { Footer } from "@/components/Footer";
 import { cn } from "@/lib/utils";
 import "./globals.css";
 
@@ -28,25 +31,29 @@ export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="en" suppressHydrationWarning>
-      <body
-        className={cn(
-          "flex min-h-[100dvh] flex-col bg-background",
-          fontSans.variable
-        )}
-      >
-        <ThemeProvider
-          attribute="class"
-          defaultTheme="system"
-          enableSystem
-          disableTransitionOnChange
+    <ClerkProvider>
+      <html lang="en" suppressHydrationWarning>
+        <body
+          className={cn(
+            "flex min-h-[100dvh] flex-col bg-background",
+            fontSans.variable
+          )}
         >
-          <Analytics />
-          <Navbar />
-          {children}
-          <ScrollToTop />
-        </ThemeProvider>
-      </body>
-    </html>
+          <ThemeProvider
+            attribute="class"
+            defaultTheme="system"
+            enableSystem
+            disableTransitionOnChange
+          >
+            <Analytics />
+            <Navbar />
+            {children}
+            <ScrollToTop />
+            <Toaster />
+            <Footer />
+          </ThemeProvider>
+        </body>
+      </html>
+    </ClerkProvider>
   );
 }

@@ -6,7 +6,6 @@ import { Testimonials } from "@/components/Testimonials";
 import { Products } from "@/components/ProductSection";
 import { FAQ } from "@/components/FAQ";
 import { Metadata } from "next";
-import { Footer } from "@/components/Footer";
 
 export const metadata: Metadata = {
   title: "Home",
@@ -23,7 +22,6 @@ export default function Page() {
       <CTASection />
       <Testimonials />
       <FAQ />
-      <Footer />
     </main>
   );
 }

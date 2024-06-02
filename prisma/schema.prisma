@@ -1,0 +1,132 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Invoice {
+  id             Int          @id @default(autoincrement())
+  userId         Int
+  subscriptionId Int
+  amount         Float
+  date           DateTime
+  status         String
+  Subscription   Subscription @relation(fields: [subscriptionId], references: [id])
+  User           User         @relation(fields: [userId], references: [id])
+}
+
+model Loan {
+  id           Int      @id @default(autoincrement())
+  propertyId   Int
+  userId       Int
+  loanAmount   Float
+  interestRate Float
+  startDate    DateTime
+  endDate      DateTime
+  Property     Property @relation(fields: [propertyId], references: [id])
+  User         User     @relation(fields: [userId], references: [id])
+}
+
+model Property {
+  id              Int          @id @default(autoincrement())
+  name            String
+  description     String
+  typeId          Int
+  location        String
+  state           String
+  country         String
+  paymentDuration String
+  Loan            Loan[]
+  roadmap         Roadmap[]
+  PropertyType    PropertyType @relation(fields: [typeId], references: [id])
+  Rental          Rental[]
+  Sale            Sale[]
+}
+
+model PropertyType {
+  id       Int        @id @default(autoincrement())
+  name     String     @unique
+  Property Property[]
+}
+
+model Rental {
+  id         Int      @id @default(autoincrement())
+  propertyId Int
+  userId     Int
+  startDate  DateTime
+  endDate    DateTime
+  rentAmount Float
+  Property   Property @relation(fields: [propertyId], references: [id])
+  User       User     @relation(fields: [userId], references: [id])
+}
+
+model Sale {
+  id                       Int      @id @default(autoincrement())
+  propertyId               Int
+  buyerId                  Int
+  sellerId                 Int
+  salePrice                Float
+  saleDate                 DateTime
+  User_Sale_buyerIdToUser  User     @relation("Sale_buyerIdToUser", fields: [buyerId], references: [id])
+  Property                 Property @relation(fields: [propertyId], references: [id])
+  User_Sale_sellerIdToUser User     @relation("Sale_sellerIdToUser", fields: [sellerId], references: [id])
+}
+
+model Subscription {
+  id                 Int       @id @default(autoincrement())
+  userId             Int
+  plan               String
+  startDate          DateTime
+  endDate            DateTime
+  cashbackPercentage Float
+  Invoice            Invoice[]
+  User               User      @relation(fields: [userId], references: [id])
+}
+
+model User {
+  id                       Int            @id @default(autoincrement())
+  clerkUserId              String         @unique
+  createdAt                DateTime
+  email                    String
+  roadmaps                 Roadmap[]
+  Invoice                  Invoice[]
+  Loan                     Loan[]
+  Rental                   Rental[]
+  Sale_Sale_buyerIdToUser  Sale[]         @relation("Sale_buyerIdToUser")
+  Sale_Sale_sellerIdToUser Sale[]         @relation("Sale_sellerIdToUser")
+  Subscription             Subscription[]
+}
+
+model Roadmap {
+  id          Int           @id @default(autoincrement())
+  title       String
+  description String
+  type        RoadmapType
+  votes       Int           @default(0)
+  status      RoadmapStatus @default(PENDING)
+  userId      String
+  user        User          @relation(fields: [userId], references: [clerkUserId])
+  propertyId  Int?
+  property    Property?     @relation(fields: [propertyId], references: [id])
+  createdAt   DateTime      @default(now())
+  updatedAt   DateTime      @updatedAt
+
+  @@index([userId, propertyId])
+}
+
+enum RoadmapType {
+  FEATURE
+  COMPLAINT
+  SUGGESTION
+}
+
+enum RoadmapStatus {
+  PENDING
+  ACCEPTED
+  REJECTED
+  IN_PROGRESS
+  COMPLETED
+}
