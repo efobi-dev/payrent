@@ -8,6 +8,9 @@ module.exports = {
     remotePatterns: [
       {
         hostname: "*.unsplash.com",
+      },
+      {
+        hostname: 'img.clerk.com'
       }
     ]
   },

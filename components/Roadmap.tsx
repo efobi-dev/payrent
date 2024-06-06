@@ -2,20 +2,23 @@
 
 import { Button } from "@/components/ui/button";
 import { toast } from "sonner";
-import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
-import { useState } from "react";
+import { RadioGroup, RadioGroupItem } from "./ui/radio-group";
 import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuLabel,
-  DropdownMenuRadioGroup,
-  DropdownMenuRadioItem,
-  DropdownMenuSeparator,
-  DropdownMenuTrigger,
-} from "./ui/dropdown-menu";
+  Form,
+  FormControl,
+  FormDescription,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from "@/components/ui/form";
 import useSWR, { mutate } from "swr";
+import { useForm } from "react-hook-form";
+import { z } from "zod";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { roadmapSchema } from "@/types/types";
 import { fetcher } from "@/lib/utils";
 import { ArrowUpIcon, ArrowDownIcon } from "lucide-react";
 import { useUser } from "@clerk/nextjs";
@@ -30,7 +33,6 @@ const handleVoteUp = async (roadmapId: RoadmapItem["id"]) => {
       method: "POST",
       body: JSON.stringify({ roadmapId, vote: "up" }),
     });
-
     if (response.ok) {
       mutate("/api/roadmap/read");
     } else {
@@ -64,20 +66,20 @@ export default function RoadmapHero() {
   const { data, isLoading } = useSWR("/api/roadmap/read", fetcher);
   const { user, isLoaded } = useUser();
   const [pending, startTransition] = useTransition();
-  const [requestType, setRequestType] = useState<RoadmapItem["type"] | string>(
-    "FEATURE"
-  );
 
-  async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
-    event.preventDefault();
+  const form = useForm<z.infer<typeof roadmapSchema>>({
+    resolver: zodResolver(roadmapSchema),
+    defaultValues: {
+      type: "FEATURE",
+      user: isLoaded && user ? user.id : "",
+    },
+  });
 
-    const form = event.currentTarget;
-    const formData = new FormData(form);
-
+  async function onSubmit(values: z.infer<typeof roadmapSchema>) {
     startTransition(async () => {
       await fetch("/api/roadmap/create", {
         method: "POST",
-        body: formData,
+        body: JSON.stringify(values),
       }).then((response) => {
         if (!response.ok) {
           toast("Something went wrong", {
@@ -88,6 +90,7 @@ export default function RoadmapHero() {
           toast("Response received successfully", {
             description: "Your request has been submitted and pending review",
           });
+          mutate("/api/roadmap/read");
         }
       });
     });
@@ -95,7 +98,7 @@ export default function RoadmapHero() {
 
   return (
     <section className="flex-1 py-8">
-      <div className="container px-4 md:px-6">
+      <div className="container space-y-2 md:px-6">
         <div className="mb-8">
           <h1 className="text-3xl font-bold">Roadmap</h1>
           <p className="text-gray-500 dark:text-gray-400">
@@ -115,8 +118,10 @@ export default function RoadmapHero() {
               src={user.imageUrl}
               alt={user.firstName || ""}
               className="rounded-full h-12 w-12"
+              width={50}
+              height={50}
             />
-            <div className="space-y-2 text-pretty text-orange-400">
+            <div className="py-2 text-pretty leading-snug tracking-wide text-xl text-orange-400">
               {user.firstName && `Hi, ${user.firstName}`}
             </div>
           </div>
@@ -166,38 +171,41 @@ export default function RoadmapHero() {
                     <ArrowUpIcon className="h-5 w-5 text-green-500" />
                   </Button>
                   <span className="text-lg font-semibold">{item.votes}</span>
-                  <Button variant="ghost" size="icon">
-                    <ArrowDownIcon
-                      className="h-5 w-5 text-red-500"
-                      onClick={() => handleVoteDown(item.id)}
-                    />
+                  <Button
+                    variant="ghost"
+                    size="icon"
+                    onClick={() => handleVoteDown(item.id)}
+                  >
+                    <ArrowDownIcon className="h-5 w-5 text-red-500" />
                   </Button>
                 </div>
-                <Button
-                  variant="outline"
-                  className={
-                    item.status === "IN_PROGRESS"
-                      ? "text-blue-500"
-                      : item.status === "ACCEPTED" ||
-                        item.status === "COMPLETED"
-                      ? "text-green-500"
-                      : "text-red-500"
-                  }
-                >
-                  {item.status}
-                </Button>
-                <Button
-                  variant="outline"
-                  className={
-                    item.type === "FEATURE"
-                      ? "text-orange-500"
-                      : item.type === "SUGGESTION"
-                      ? "text-purple-500"
-                      : "text-red-500"
-                  }
-                >
-                  {item.status}
-                </Button>
+                <div className="space-x-2">
+                  <Button
+                    variant="outline"
+                    className={
+                      item.status === "IN_PROGRESS"
+                        ? "text-blue-500"
+                        : item.status === "ACCEPTED" ||
+                          item.status === "COMPLETED"
+                        ? "text-green-500"
+                        : "text-red-500"
+                    }
+                  >
+                    {item.status}
+                  </Button>
+                  <Button
+                    variant="outline"
+                    className={
+                      item.type === "FEATURE"
+                        ? "text-orange-500"
+                        : item.type === "SUGGESTION"
+                        ? "text-purple-500"
+                        : "text-red-500"
+                    }
+                  >
+                    {item.type}
+                  </Button>
+                </div>
               </div>
             ))
           ) : (
@@ -209,67 +217,108 @@ export default function RoadmapHero() {
             Submit a feature request, complaint or suggestion.
           </h2>
           {isLoaded && user ? (
-            <form onSubmit={handleSubmit} className="grid gap-4">
-              <div className="space-y-1">
-                <Label htmlFor="title">Title</Label>
-                <Input
-                  id="title"
+            <Form {...form}>
+              <form
+                onSubmit={form.handleSubmit(onSubmit)}
+                className="grid gap-4"
+              >
+                <FormField
+                  control={form.control}
                   name="title"
-                  placeholder="Enter a suitable title"
-                  required
+                  render={({ field }) => (
+                    <FormItem className="space-y-1">
+                      <FormLabel>Title</FormLabel>
+                      <FormControl>
+                        <Input
+                          placeholder="Enter a suitable title"
+                          {...field}
+                        />
+                      </FormControl>
+                      <FormDescription className="flex justify-end">
+                        A title for your request
+                      </FormDescription>
+                      <FormMessage />
+                    </FormItem>
+                  )}
                 />
-              </div>
-              <div className="space-y-1">
-                <Label htmlFor="description">Description</Label>
-                <Textarea
-                  id="description"
+                <FormField
+                  control={form.control}
+                  name="type"
+                  render={({ field }) => (
+                    <FormItem className="space-y-3 w-2/3">
+                      <FormLabel>My request is a...</FormLabel>
+                      <FormControl>
+                        <RadioGroup
+                          onValueChange={field.onChange}
+                          defaultValue={field.value}
+                          className="flex flex-col space-y-1"
+                        >
+                          <FormItem className="flex items-center space-x-3 space-y-0">
+                            <FormControl>
+                              <RadioGroupItem value="FEATURE" />
+                            </FormControl>
+                            <FormLabel className="font-normal">
+                              Feature
+                            </FormLabel>
+                          </FormItem>
+                          <FormItem className="flex items-center space-x-3 space-y-0">
+                            <FormControl>
+                              <RadioGroupItem value="COMPLAINT" />
+                            </FormControl>
+                            <FormLabel className="font-normal">
+                              Complaint
+                            </FormLabel>
+                          </FormItem>
+                          <FormItem className="flex items-center space-x-3 space-y-0">
+                            <FormControl>
+                              <RadioGroupItem value="SUGGESTION" />
+                            </FormControl>
+                            <FormLabel className="font-normal">
+                              Suggestion
+                            </FormLabel>
+                          </FormItem>
+                        </RadioGroup>
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+                <FormField
+                  control={form.control}
                   name="description"
-                  placeholder="Describe with concision your request"
-                  required
+                  render={({ field }) => (
+                    <FormItem className="space-y-1">
+                      <FormLabel>Description</FormLabel>
+                      <FormControl>
+                        <Textarea
+                          placeholder="Describe with concision your request"
+                          {...field}
+                        />
+                      </FormControl>
+                      <FormDescription className="flex justify-end">
+                        The clearer the description, the quicker the approval
+                        process
+                      </FormDescription>
+                      <FormMessage />
+                    </FormItem>
+                  )}
                 />
-              </div>
-              <div className="space-y-1">
-                <Label htmlFor="request-type">Type</Label>
-                <DropdownMenu>
-                  <DropdownMenuTrigger asChild>
-                    <Button variant="outline">Select Type</Button>
-                  </DropdownMenuTrigger>
-                  <DropdownMenuContent className="w-56">
-                    <DropdownMenuLabel>Request Type</DropdownMenuLabel>
-                    <DropdownMenuSeparator />
-                    <DropdownMenuRadioGroup
-                      id="request-type"
-                      value={requestType}
-                      onValueChange={setRequestType}
-                      {...{ name: "request-type" }}
-                    >
-                      <DropdownMenuRadioItem value="FEATURE">
-                        FEATURE
-                      </DropdownMenuRadioItem>
-                      <DropdownMenuRadioItem value="COMPLAINT">
-                        COMPLAINT
-                      </DropdownMenuRadioItem>
-                      <DropdownMenuRadioItem value="SUGGESTION">
-                        SUGGESTION
-                      </DropdownMenuRadioItem>
-                    </DropdownMenuRadioGroup>
-                  </DropdownMenuContent>
-                </DropdownMenu>
-              </div>
-              <div className="space-y-1">
-                <Label htmlFor="user">User</Label>
-                <Input id="user" name="user" value={user.id} hidden required />
-              </div>
-              <Button type="submit" disabled={pending}>
-                {pending ? (
-                  <div className="flex items-center justify-center h-5 w-5 animate-spin rounded-full border-2 border-current border-r-transparent mr-3" />
-                ) : (
-                  <span>Submit Proposal</span>
-                )}
-              </Button>
-            </form>
+                <input
+                  type="hidden"
+                  {...form.register("user")}
+                  value={user.id}
+                />
+                <Button type="submit" disabled={pending}>
+                  {pending ? (
+                    <div className="flex items-center justify-center h-5 w-5 animate-spin rounded-full border-2 border-current border-r-transparent mr-3" />
+                  ) : (
+                    <span>Submit</span>
+                  )}
+                </Button>
+              </form>
+            </Form>
           ) : (
-            <div className="py-2">
+            <div className="space-y-1">
               <Skeleton className="h-4 w-[200px]" />
               <Skeleton className="h-4 w-[250px]" />
               <Skeleton className="h-4 w-[200px]" />

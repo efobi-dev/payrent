@@ -2,14 +2,15 @@ import {prisma} from '@/lib/utils'
 import { RoadmapItem } from '@/types/types'
 
 export async function POST(req: Request) {
-    const body =  await req.formData()
+  const body =  await req.json()
 
-    const title = body.get('title') as RoadmapItem['title']
-    const description = body.get('description') as RoadmapItem['description']
-    const type = body.get('type') as RoadmapItem['type']
-    const user = body.get('user') as RoadmapItem['user']
+    const title = body.title as RoadmapItem['title']
+    const description = body.description as RoadmapItem['description']
+    const type = body.type as RoadmapItem['type']
+    const user = body.user as RoadmapItem['user']
 
     if (!title || !description || !type || !user) {
+        console.log(`title: ${title} description: ${description} type ${type} user ${user}`)
         return new Response('Missing required form data', {status: 400})
     }
 

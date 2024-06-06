@@ -6,9 +6,10 @@ interface VoteRequest {
 }
 
 export async function POST(req: Request) {
-    const {roadmapId, vote} = req.json() as unknown as VoteRequest
-
     try {
+    const body = await req.json() as VoteRequest
+    const {roadmapId, vote} = body
+
         const roadmap = await prisma.roadmap.findUnique({
             where: {
                 id: roadmapId
