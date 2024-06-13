@@ -51,8 +51,8 @@ export const Navbar = () => {
               <Image
                 src="/payrent-logo.png"
                 alt="payrent logo"
-                width={50}
-                height={50}
+                width={70}
+                height={70}
               />
             </a>
           </NavigationMenuItem>

@@ -1,5 +1,4 @@
 import HeroSection from "@/components/HeroSection";
-import Sponsors from "@/components/Sponsors";
 import BlogSection from "@/components/BlogSection";
 import { CTASection } from "@/components/CTASection";
 import { Testimonials } from "@/components/Testimonials";
@@ -16,7 +15,6 @@ export default function Page() {
   return (
     <main className="flex-1">
       <HeroSection />
-      <Sponsors />
       <Products />
       <BlogSection />
       <CTASection />

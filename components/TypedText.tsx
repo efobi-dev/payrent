@@ -9,7 +9,7 @@ export const TypedText = () => {
 
   useEffect(() => {
     const options = {
-      strings: [" Own", " Rent", " Lease", " Invest"],
+      strings: [" Own", " Rent", " Lease"],
       typeSpeed: 100,
       backSpeed: 50,
       loop: true,

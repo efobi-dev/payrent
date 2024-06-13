@@ -1,6 +1,25 @@
 "use client";
 
 import Image from "next/image";
+import X from "@/app/assets/x";
+import LinkedIn from "@/app/assets/linkedin";
+import Instagram from "@/app/assets/instagram";
+import Facebook from "@/app/assets/facebook";
+
+const sponsor = [
+  {
+    icon: "/capacity-delta.png",
+    name: "Delta Capacity",
+  },
+  {
+    icon: "/google-wordmark.svg",
+    name: "Google",
+  },
+  {
+    icon: "/lagos-state.png",
+    name: "Lagos State",
+  },
+];
 
 export const Footer = () => {
   return (
@@ -18,15 +37,61 @@ export const Footer = () => {
         </div>
 
         <div className="flex flex-col gap-2">
-          <h3 className="font-bold text-lg">Follow US</h3>
-          <div>
-            <a
-              rel="noreferrer noopener"
-              href="#"
-              className="opacity-60 hover:opacity-100"
-            >
-              Twitter
-            </a>
+          <h3 className="font-bold text-lg">Follow Us</h3>
+          <div className="flex md:flex-row gap-2">
+            <div>
+              <a
+                rel="noreferrer noopener"
+                href="https://www.twitter.com/payrentng"
+                className="opacity-60 hover:opacity-100"
+              >
+                <X className="w-6 h-6" />
+              </a>
+            </div>
+            <div>
+              <a
+                rel="noreferrer noopener"
+                href="https://www.instagram.com/payrentng"
+                className="opacity-60 hover:opacity-100"
+              >
+                <Instagram className="w-6 h-6" />
+              </a>
+            </div>
+            <div>
+              <a
+                rel="noreferrer noopener"
+                href="https://www.facebook.com/payrentng"
+                className="opacity-60 hover:opacity-100"
+              >
+                <Facebook className="w-6 h-6" />
+              </a>
+            </div>
+            <div>
+              <a
+                rel="noreferrer noopener"
+                href="https://www.linkedin.com/company/payrentng"
+                className="opacity-60 hover:opacity-100"
+              >
+                <LinkedIn className="w-6 h-6" />
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <div className="flex flex-col gap-2">
+          <h3 className="font-bold text-lg">Sponsors</h3>
+          <div className="flex md:flex-row gap-2">
+            {sponsor.map(({ icon, name }) => (
+              <div key={name} className="flex items-center">
+                <Image
+                  src={icon}
+                  alt={name}
+                  width={150}
+                  height={150}
+                  className="rounded-full"
+                />
+              </div>
+            ))}
           </div>
         </div>
       </section>
