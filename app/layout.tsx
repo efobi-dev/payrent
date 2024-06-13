@@ -12,7 +12,7 @@ import { AppProps } from "next/app";
 import "./globals.css";
 
 const fontSans = FontSans({
-  subsets: ["latin"],
+  subsets: ["latin-ext"],
   variable: "--font-sans",
 });
 
