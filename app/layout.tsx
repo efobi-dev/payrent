@@ -30,10 +30,9 @@ export const metadata: Metadata = {
 
 export default function RootLayout({
   children,
-  pageProps,
-}: Readonly<{ children: React.ReactNode; pageProps: AppProps }>) {
+}: Readonly<{ children: React.ReactNode }>) {
   return (
-    <ClerkProvider {...pageProps}>
+    <ClerkProvider>
       <html lang="en" suppressHydrationWarning>
         <body
           className={cn(
