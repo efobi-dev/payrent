@@ -3,8 +3,8 @@ generator client {
 }
 
 datasource db {
-  provider = "postgresql"
-  url      = env("DATABASE_URL")
+  provider = "sqlite"
+  url      = "file:./dev.db"
 }
 
 model Invoice {
@@ -101,32 +101,18 @@ model User {
 }
 
 model Roadmap {
-  id          Int           @id @default(autoincrement())
+  id          Int       @id @default(autoincrement())
   title       String
   description String
-  type        RoadmapType
-  votes       Int           @default(0)
-  status      RoadmapStatus @default(PENDING)
+  type        String    @default("FEATURE")
+  votes       Int       @default(0)
+  status      String    @default("PENDING")
   userId      String
-  user        User          @relation(fields: [userId], references: [clerkUserId])
+  user        User      @relation(fields: [userId], references: [clerkUserId])
   propertyId  Int?
-  property    Property?     @relation(fields: [propertyId], references: [id])
-  createdAt   DateTime      @default(now())
-  updatedAt   DateTime      @updatedAt
+  property    Property? @relation(fields: [propertyId], references: [id])
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
 
   @@index([userId, propertyId])
-}
-
-enum RoadmapType {
-  FEATURE
-  COMPLAINT
-  SUGGESTION
-}
-
-enum RoadmapStatus {
-  PENDING
-  ACCEPTED
-  REJECTED
-  IN_PROGRESS
-  COMPLETED
 }

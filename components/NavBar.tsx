@@ -26,7 +26,7 @@ const routeList = [
     label: "Blog",
   },
   {
-    href: "https://web.payrentng.com",
+    href: "/marketplace",
     label: "Marketplace",
   },
   {
