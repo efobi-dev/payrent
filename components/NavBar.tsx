@@ -30,6 +30,10 @@ const routeList = [
     label: "Marketplace",
   },
   {
+    href: "/packages",
+    label: "Packages",
+  },
+  {
     href: "/roadmap",
     label: "Roadmap",
   },

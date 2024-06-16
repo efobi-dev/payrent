@@ -8,7 +8,6 @@ import { ClerkProvider } from "@clerk/nextjs";
 import { Toaster } from "@/components/ui/sonner";
 import { Footer } from "@/components/Footer";
 import { cn } from "@/lib/utils";
-import { AppProps } from "next/app";
 import "./globals.css";
 
 const fontSans = FontSans({
