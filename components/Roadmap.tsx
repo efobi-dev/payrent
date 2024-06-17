@@ -85,32 +85,6 @@ export default function Roadmap() {
           </div>
         </div>
       </section>
-      <section className="w-full py-12 md:py-24 lg:py-32">
-        <div className="container px-4 md:px-6">
-          <div className="mx-auto grid max-w-5xl items-center gap-6 py-12 lg:grid-cols-2 lg:gap-12">
-            <div className="relative flex items-center justify-center">
-              <div className="absolute inset-0 -z-10 border-l border-gray-300 dark:border-gray-600" />
-              <div className="relative flex h-[300px] w-full items-center justify-center">
-                <div className="absolute inset-0 bg-gradient-to-r from-gray-100 to-transparent dark:from-gray-800 dark:to-transparent" />
-                <div className="relative flex h-[200px] w-full items-center justify-center">
-                  <div className="absolute inset-0 bg-gradient-to-l from-gray-100 to-transparent dark:from-gray-800 dark:to-transparent" />
-                  <div className="relative h-[150px] w-[150px] rounded-full bg-gray-200 dark:bg-gray-700 flex items-center justify-center">
-                    <div className="h-[120px] w-[120px] rounded-full bg-gray-100 dark:bg-gray-800 flex items-center justify-center">
-                      <div className="h-[90px] w-[90px] rounded-full bg-gray-200 dark:bg-gray-700 flex items-center justify-center">
-                        <div className="h-[60px] w-[60px] rounded-full bg-gray-100 dark:bg-gray-800 flex items-center justify-center">
-                          <div className="h-[30px] w-[30px] rounded-full bg-gray-200 dark:bg-gray-700 flex items-center justify-center">
-                            <div className="h-[10px] w-[10px] rounded-full bg-gray-300 dark:bg-gray-600" />
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
     </main>
   );
 }

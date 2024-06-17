@@ -23,7 +23,7 @@ export const metadata: Metadata = {
   description: "One Stop Real Estate Solution Provider in Nigeria",
   metadataBase: new URL("https://www.payrentng.com"),
   openGraph: {
-    images: "/og-image.jpg",
+    images: "/og-image.png",
   },
 };
 
