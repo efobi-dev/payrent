@@ -25,10 +25,10 @@ export default function HeroSection() {
             </div>
             <div className="flex flex-col gap-2 min-[400px]:flex-row">
               <Button>
-                <Link href="https://web.payrentng.com">Become A Member</Link>
+                <Link href="/sign-up">Become A Member</Link>
               </Button>
               <Button variant="outline">
-                <Link href="/packages">Get More Information</Link>
+                <Link href="mailto:sales@payrentng.com">Book A Demo</Link>
               </Button>
             </div>
           </div>

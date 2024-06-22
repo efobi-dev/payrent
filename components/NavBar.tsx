@@ -19,6 +19,7 @@ import { buttonVariants } from "./ui/button";
 import { Menu } from "lucide-react";
 import ModeToggle from "./ThemeToggle";
 import Link from "next/link";
+import { UserButton, useUser } from "@clerk/nextjs";
 
 const routeList = [
   {
@@ -26,12 +27,8 @@ const routeList = [
     label: "Blog",
   },
   {
-    href: "/marketplace",
-    label: "Marketplace",
-  },
-  {
-    href: "/packages",
-    label: "Packages",
+    href: "/properties",
+    label: "Properties",
   },
   {
     href: "/roadmap",
@@ -41,6 +38,7 @@ const routeList = [
 
 export const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const { user } = useUser();
 
   return (
     <header className="sticky border-b-[1px] top-0 z-40 w-full bg-white dark:border-b-slate-700 dark:bg-background">
@@ -63,8 +61,12 @@ export const Navbar = () => {
 
           {/* mobile */}
           <span className="flex md:hidden">
+            {user && (
+              <div className="px-2 flex items-center">
+                <UserButton />
+              </div>
+            )}
             <ModeToggle />
-
             <Sheet open={isOpen} onOpenChange={setIsOpen}>
               <SheetTrigger className="px-2">
                 <Menu
@@ -124,12 +126,16 @@ export const Navbar = () => {
             ))}
           </nav>
           <div className="hidden md:flex gap-2">
-            <Button
-              className="bg-orange-500 text-white hover:bg-orange-600 dark:bg-orange-500 dark:text-gray-900 dark:hover:bg-orange-600"
-              variant="outline"
-            >
-              <Link href="mailto:sales@payrentng.com">Contact Us</Link>
-            </Button>
+            {user ? (
+              <UserButton />
+            ) : (
+              <Button
+                className="bg-orange-500 text-white hover:bg-orange-600 dark:bg-orange-500 dark:text-gray-900 dark:hover:bg-orange-600"
+                variant="outline"
+              >
+                <Link href="/sign-up">Sign Up</Link>
+              </Button>
+            )}
             <ModeToggle />
           </div>
         </NavigationMenuList>

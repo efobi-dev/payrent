@@ -1,12 +1,36 @@
 "use client";
 
-import { Card, CardHeader, CardContent, CardFooter } from "./ui/card";
+import Link from "next/link";
 import { Button } from "./ui/button";
 
 export default function Packages() {
   return (
-    <section className="w-full max-w-6xl mx-auto px-4 py-12 md:py-20 lg:py-28">
-      <div className="text-center space-y-4 mb-12 md:mb-16 lg:mb-20"></div>
+    <section className="w-full py-12 md:ppy-24 lg:py-32">
+      <div className="container grid items-center gap-8 px-4 md:px-6 lg:grid-cols-2 lg:gap-12">
+        <div className="aspect-video w-full overflow-hidden rounded-xl">
+          <iframe
+            className="h-full w-full object-cover"
+            src="https://drive.google.com/file/d/1hOyaSIGXZ8UJpjrgesVUYAzn4dvyYQAw/preview"
+            width="640"
+            height="480"
+          />
+        </div>
+        <div className="space-y-4">
+          <div className="space-y-2">
+            <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl">
+              Discover our Packages
+            </h2>
+            <p className="max-w-[600px] text-gray-500 md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed dark:text-gray-400">
+              Explore our wide range of packages designed to meet your needs.
+              From basic to enterprise-level solutions, we&apos;ve got you
+              covered.
+            </p>
+          </div>
+          <Button>
+            <Link href="/properties">Join us</Link>
+          </Button>
+        </div>
+      </div>
     </section>
   );
 }

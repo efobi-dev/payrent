@@ -18,7 +18,7 @@ const roadmap: RoadmapItem[] = [
     date: "Q1 2024",
   },
   {
-    title: "PayRent Marketplace",
+    title: "PayRent Properties",
     description: "Access all of PayRent from the web",
     status: "IN PROGRESS",
     date: "Q1 2024",

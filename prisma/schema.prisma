@@ -8,111 +8,108 @@ datasource db {
 }
 
 model Invoice {
-  id             Int          @id @default(autoincrement())
-  userId         Int
-  subscriptionId Int
+  id             String       @id @default(uuid())
+  userId         String
+  subscriptionId String
   amount         Float
   date           DateTime
   status         String
   Subscription   Subscription @relation(fields: [subscriptionId], references: [id])
-  User           User         @relation(fields: [userId], references: [id])
+  User           User         @relation(fields: [userId], references: [clerkUserId])
 }
 
 model Loan {
-  id           Int      @id @default(autoincrement())
-  propertyId   Int
-  userId       Int
+  id           String   @id @default(uuid())
+  propertyId   String
+  userId       String
   loanAmount   Float
   interestRate Float
   startDate    DateTime
   endDate      DateTime
   Property     Property @relation(fields: [propertyId], references: [id])
-  User         User     @relation(fields: [userId], references: [id])
+  User         User     @relation(fields: [userId], references: [clerkUserId])
 }
 
 model Property {
-  id              Int          @id @default(autoincrement())
+  id              String          @id @default(uuid())
   name            String
   description     String
-  typeId          Int
+  images          PropertyImage[]
+  bedrooms        Int
+  bathrooms       Int
   location        String
   state           String
-  country         String
-  paymentDuration String
+  paymentDuration String?
+  isForSale       Boolean         @default(false)
+  isForRent       Boolean         @default(false)
+  salePrice       Float?
+  rentPrice       Float?
   Loan            Loan[]
-  roadmap         Roadmap[]
-  PropertyType    PropertyType @relation(fields: [typeId], references: [id])
   Rental          Rental[]
   Sale            Sale[]
+  Like            Like[]
 }
 
-model PropertyType {
-  id       Int        @id @default(autoincrement())
-  name     String     @unique
-  Property Property[]
+model PropertyImage {
+  id         String   @id @default(uuid())
+  propertyId String
+  url        String
+  Property   Property @relation(fields: [propertyId], references: [id])
 }
 
 model Rental {
-  id         Int      @id @default(autoincrement())
-  propertyId Int
-  userId     Int
+  id         String   @id @default(uuid())
+  propertyId String
+  userId     String
   startDate  DateTime
   endDate    DateTime
   rentAmount Float
   Property   Property @relation(fields: [propertyId], references: [id])
-  User       User     @relation(fields: [userId], references: [id])
+  User       User     @relation(fields: [userId], references: [clerkUserId])
 }
 
 model Sale {
-  id                       Int      @id @default(autoincrement())
-  propertyId               Int
-  buyerId                  Int
-  sellerId                 Int
+  id                       String   @id @default(uuid())
+  propertyId               String
+  buyerId                  String
+  sellerId                 String
   salePrice                Float
   saleDate                 DateTime
-  User_Sale_buyerIdToUser  User     @relation("Sale_buyerIdToUser", fields: [buyerId], references: [id])
+  User_Sale_buyerIdToUser  User     @relation("Sale_buyerIdToUser", fields: [buyerId], references: [clerkUserId])
   Property                 Property @relation(fields: [propertyId], references: [id])
-  User_Sale_sellerIdToUser User     @relation("Sale_sellerIdToUser", fields: [sellerId], references: [id])
+  User_Sale_sellerIdToUser User     @relation("Sale_sellerIdToUser", fields: [sellerId], references: [clerkUserId])
 }
 
 model Subscription {
-  id                 Int       @id @default(autoincrement())
-  userId             Int
+  id                 String    @id @default(uuid())
+  userId             String
   plan               String
   startDate          DateTime
   endDate            DateTime
   cashbackPercentage Float
   Invoice            Invoice[]
-  User               User      @relation(fields: [userId], references: [id])
+  User               User      @relation(fields: [userId], references: [clerkUserId])
 }
 
 model User {
   id                       Int            @id @default(autoincrement())
   clerkUserId              String         @unique
   createdAt                DateTime
-  email                    String
-  roadmaps                 Roadmap[]
+  email                    String         @unique
   Invoice                  Invoice[]
   Loan                     Loan[]
   Rental                   Rental[]
   Sale_Sale_buyerIdToUser  Sale[]         @relation("Sale_buyerIdToUser")
   Sale_Sale_sellerIdToUser Sale[]         @relation("Sale_sellerIdToUser")
   Subscription             Subscription[]
+  Like                     Like[]
 }
 
-model Roadmap {
-  id          Int       @id @default(autoincrement())
-  title       String
-  description String
-  type        String    @default("FEATURE")
-  votes       Int       @default(0)
-  status      String    @default("PENDING")
-  userId      String
-  user        User      @relation(fields: [userId], references: [clerkUserId])
-  propertyId  Int?
-  property    Property? @relation(fields: [propertyId], references: [id])
-  createdAt   DateTime  @default(now())
-  updatedAt   DateTime  @updatedAt
-
-  @@index([userId, propertyId])
+model Like {
+  id         String   @id @default(uuid())
+  userId     String
+  propertyId String
+  createdAt  DateTime @default(now())
+  User       User     @relation(fields: [userId], references: [clerkUserId])
+  Property   Property @relation(fields: [propertyId], references: [id])
 }

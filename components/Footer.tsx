@@ -32,7 +32,12 @@ export const Footer = () => {
             href="/"
             className="font-bold text-xl flex"
           >
-            <Image src="/payrent-logo.png" alt="logo" width={50} height={50} />
+            <Image
+              src="/payrent-logo.png"
+              alt="logo"
+              width={200}
+              height={200}
+            />
           </a>
         </div>
 

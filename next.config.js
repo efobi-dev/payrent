@@ -11,7 +11,8 @@ module.exports = {
       },
       {
         hostname: 'img.clerk.com'
-      }
+      },
+      {hostname: 'loremflickr.com'}, {hostname: 'picsum.photos'}
     ]
   },
   logging: {
