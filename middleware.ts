@@ -12,7 +12,7 @@ const isPublicRoute = createRouteMatcher([
   "/properties(.*)",
 ]);
 
-const isAdminRoute = createRouteMatcher(["/dashboard/admin(.*)"]);
+const isAdminRoute = createRouteMatcher(["/admin(.*)"]);
 
 export default clerkMiddleware((auth, request) => {
   if (isAdminRoute(request)) {
