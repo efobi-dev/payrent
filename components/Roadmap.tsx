@@ -8,9 +8,8 @@ import {
   CardContent,
 } from "./ui/card";
 import { Badge } from "./ui/badge";
-import { RoadmapItem } from "@/types/types";
 
-const roadmap: RoadmapItem[] = [
+const roadmap = [
   {
     title: "Website Redesign",
     description: "A better performant and accessible website",
