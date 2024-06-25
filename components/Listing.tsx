@@ -81,12 +81,12 @@ export default function Listing() {
                       </div>
                       <div className="flex items-center gap-2 text-gray-500 dark:text-gray-400 mt-2">
                         <Bed className="w-5 h-5" />
-                        <span>{property.bedrooms} Bedrooms</span>
+                        <span>{property.bedrooms} Bedroom(s)</span>
                         <Bath className="w-5 h-5" />
-                        <span>{property.bathrooms} Bathrooms</span>
+                        <span>{property.bathrooms} Bathroom(s)</span>
                       </div>
                       <p className="text-gray-500 dark:text-gray-400 mt-4">
-                        {property.description}
+                        {property.excerpt}
                       </p>
                       <p className="text-gray-500 dark:text-gray-400 mt-1">
                         {property.location}, {property.state}

@@ -46,3 +46,36 @@ export async function likeProperty(propertyId: Properties["id"]) {
     return { error: "Error occurred processing your request" };
   }
 }
+
+export async function getPropertyDetails(propertyId: Properties["id"]) {
+  const { userId } = auth();
+  try {
+    const property = await prisma.property.findUnique({
+      where: { id: propertyId },
+      include: {
+        images: true,
+        Loan: true,
+        Rental: true,
+        Sale: true,
+        Like: true,
+      },
+    });
+
+    if (!property) return null;
+
+    const isLikedByCurrentUser = userId
+      ? property.Like.some((like) => like.userId === userId)
+      : false;
+
+    const propertyData: Properties = {
+      ...property,
+      isLikedByCurrentUser,
+      images: property.images.map((img) => img.url),
+      propertyType: property.propertyType as Properties["propertyType"],
+    };
+    return propertyData;
+  } catch (error) {
+    console.error(error);
+    return null;
+  }
+}

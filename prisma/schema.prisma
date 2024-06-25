@@ -33,17 +33,21 @@ model Loan {
 model Property {
   id              String          @id @default(uuid())
   name            String
+  excerpt         String
   description     String
   images          PropertyImage[]
   bedrooms        Int
   bathrooms       Int
   location        String
   state           String
-  paymentDuration String?
+  lotSize         Float
+  squareFeet      Float
+  paymentDuration Subscription[]
   isForSale       Boolean         @default(false)
   isForRent       Boolean         @default(false)
   salePrice       Float?
   rentPrice       Float?
+  propertyType    String
   Loan            Loan[]
   Rental          Rental[]
   Sale            Sale[]
@@ -83,12 +87,14 @@ model Sale {
 model Subscription {
   id                 String    @id @default(uuid())
   userId             String
+  propertyId         String
   plan               String
   startDate          DateTime
   endDate            DateTime
   cashbackPercentage Float
   Invoice            Invoice[]
   User               User      @relation(fields: [userId], references: [clerkUserId])
+  Property           Property  @relation(fields: [propertyId], references: [id])
 }
 
 model User {

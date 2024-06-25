@@ -1,5 +1,6 @@
 import { prisma } from "./lib/utils";
 import { faker } from "@faker-js/faker";
+import { nanoid } from "nanoid";
 
 export async function generatePropertyData(count: number = 50) {
   const states = [
@@ -17,8 +18,14 @@ export async function generatePropertyData(count: number = 50) {
     "Delta",
     "Imo",
   ];
-
-  const paymentDurations = ["Monthly", "Quarterly", "Yearly", null];
+  const propertyTypes = [
+    "House",
+    "Apartment",
+    "Condo",
+    "Land",
+    "Office",
+    "Flat",
+  ];
 
   for (let i = 0; i < count; i++) {
     try {
@@ -27,17 +34,25 @@ export async function generatePropertyData(count: number = 50) {
 
       const property = await prisma.property.create({
         data: {
+          id: nanoid(10),
           name: faker.lorem.words(3),
-          description: faker.lorem.paragraph(),
+          excerpt: faker.lorem.sentences(2),
+          description: faker.lorem.paragraphs(2),
           bedrooms: faker.number.int({ min: 1, max: 6 }),
           bathrooms: faker.number.int({ min: 1, max: 4 }),
+          lotSize: faker.number.float({
+            min: 1000,
+            max: 10000,
+            precision: 0.01,
+          }),
+          squareFeet: faker.number.float({
+            min: 500,
+            max: 5000,
+            precision: 0.01,
+          }),
+          propertyType: faker.helpers.arrayElement(propertyTypes),
           location: faker.location.streetAddress(),
           state: faker.helpers.arrayElement(states),
-          paymentDuration: isForRent
-            ? faker.helpers.arrayElement(paymentDurations)
-            : null,
-          isForSale,
-          isForRent,
           salePrice: isForSale
             ? faker.number.float({ min: 100000, max: 2000000, precision: 0.01 })
             : null,

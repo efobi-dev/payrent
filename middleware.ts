@@ -12,7 +12,18 @@ const isPublicRoute = createRouteMatcher([
   "/properties(.*)",
 ]);
 
+const isAdminRoute = createRouteMatcher(["/dashboard/admin(.*)"]);
+
 export default clerkMiddleware((auth, request) => {
+  if (isAdminRoute(request)) {
+    auth().protect((has) => {
+      return (
+        has({ permission: "org:sys_memberships:manage" }) ||
+        has({ permission: "org:sys_domains_manage" })
+      );
+    });
+  }
+
   if (!isPublicRoute(request)) {
     auth().protect();
   }

@@ -11,9 +11,11 @@ import { useState } from "react";
 export function LikeButton({
   propertyId,
   initialLike,
+  className,
 }: {
   propertyId: Properties["id"];
   initialLike: boolean;
+  className?: string;
 }) {
   const router = useRouter();
   const [isLiked, setIsLiked] = useState(() => initialLike);
@@ -48,7 +50,7 @@ export function LikeButton({
     <Button
       variant="ghost"
       size="icon"
-      className="rounded-full"
+      className={`rounded-full ${className ?? ""}`}
       onClick={handleLike}
     >
       <Heart

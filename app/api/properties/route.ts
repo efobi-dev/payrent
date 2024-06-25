@@ -13,6 +13,8 @@ export async function GET(request: Request) {
       ? {
           OR: [
             { name: { contains: query } },
+            { excerpt: { contains: query } },
+            { propertyType: { contains: query } },
             { description: { contains: query } },
             { location: { contains: query } },
             { state: { contains: query } },
