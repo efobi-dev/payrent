@@ -8,14 +8,17 @@ datasource db {
 }
 
 model Invoice {
-  id             String       @id @default(uuid())
+  id             String   @id @default(uuid())
   userId         String
   subscriptionId String
   amount         Float
   date           DateTime
   status         String
-  Subscription   Subscription @relation(fields: [subscriptionId], references: [id])
-  User           User         @relation(fields: [userId], references: [clerkUserId])
+  User           User     @relation(fields: [userId], references: [clerkUserId])
+  Sale           Sale?    @relation(fields: [saleId], references: [id])
+  saleId         String?
+  Rental         Rental?  @relation(fields: [rentalId], references: [id])
+  rentalId       String?
 }
 
 model Loan {
@@ -42,7 +45,7 @@ model Property {
   state           String
   lotSize         Float
   squareFeet      Float
-  paymentDuration Subscription[]
+  paymentDuration Int?
   isForSale       Boolean         @default(false)
   isForRent       Boolean         @default(false)
   salePrice       Float?
@@ -62,53 +65,40 @@ model PropertyImage {
 }
 
 model Rental {
-  id         String   @id @default(uuid())
+  id         String    @id @default(uuid())
   propertyId String
   userId     String
+  plan       String
   startDate  DateTime
   endDate    DateTime
   rentAmount Float
-  Property   Property @relation(fields: [propertyId], references: [id])
-  User       User     @relation(fields: [userId], references: [clerkUserId])
+  Invoice    Invoice[]
+  Property   Property  @relation(fields: [propertyId], references: [id])
+  User       User      @relation(fields: [userId], references: [clerkUserId])
 }
 
 model Sale {
-  id                       String   @id @default(uuid())
-  propertyId               String
-  buyerId                  String
-  sellerId                 String
-  salePrice                Float
-  saleDate                 DateTime
-  User_Sale_buyerIdToUser  User     @relation("Sale_buyerIdToUser", fields: [buyerId], references: [clerkUserId])
-  Property                 Property @relation(fields: [propertyId], references: [id])
-  User_Sale_sellerIdToUser User     @relation("Sale_sellerIdToUser", fields: [sellerId], references: [clerkUserId])
-}
-
-model Subscription {
-  id                 String    @id @default(uuid())
-  userId             String
-  propertyId         String
-  plan               String
-  startDate          DateTime
-  endDate            DateTime
-  cashbackPercentage Float
-  Invoice            Invoice[]
-  User               User      @relation(fields: [userId], references: [clerkUserId])
-  Property           Property  @relation(fields: [propertyId], references: [id])
+  id                      String    @id @default(uuid())
+  propertyId              String
+  buyerId                 String
+  plan                    String
+  salePrice               Float
+  saleDate                DateTime
+  Invoice                 Invoice[]
+  User_Sale_buyerIdToUser User      @relation("Sale_buyerIdToUser", fields: [buyerId], references: [clerkUserId])
+  Property                Property  @relation(fields: [propertyId], references: [id])
 }
 
 model User {
-  id                       Int            @id @default(autoincrement())
-  clerkUserId              String         @unique
-  createdAt                DateTime
-  email                    String         @unique
-  Invoice                  Invoice[]
-  Loan                     Loan[]
-  Rental                   Rental[]
-  Sale_Sale_buyerIdToUser  Sale[]         @relation("Sale_buyerIdToUser")
-  Sale_Sale_sellerIdToUser Sale[]         @relation("Sale_sellerIdToUser")
-  Subscription             Subscription[]
-  Like                     Like[]
+  id                      Int       @id @default(autoincrement())
+  clerkUserId             String    @unique
+  createdAt               DateTime
+  email                   String    @unique
+  Invoice                 Invoice[]
+  Loan                    Loan[]
+  Rental                  Rental[]
+  Sale_Sale_buyerIdToUser Sale[]    @relation("Sale_buyerIdToUser")
+  Like                    Like[]
 }
 
 model Like {

@@ -11,7 +11,9 @@ import { PropertyPagination } from "./listing-pagination";
 import { SearchInput } from "./search-bar";
 import { useSearchParams, useRouter } from "next/navigation";
 import Link from "next/link";
+import Image from "next/image";
 import { Button } from "./ui/button";
+import Payrent from "@/app/assets/payrent.svg";
 
 export default function Listing() {
   const router = useRouter();
@@ -49,10 +51,7 @@ export default function Listing() {
         <div className="container px-4 md:px-6">
           {isLoading ? (
             <div className="flex items-center justify-center">
-              <div className="w-12 aspect-square flex border-4 border-transparent rounded-full border-r-[#25b09b] animate-l15">
-                <div className="absolute w-full h-full border-inherit border-4 rounded-full m-1 animate-l15_2"></div>
-                <div className="absolute w-full h-full border-inherit border-4 rounded-full m-2 animate-l15_3"></div>
-              </div>
+              <Image src={Payrent} alt="loading" />
             </div>
           ) : data && data.properties.length > 0 ? (
             <>
