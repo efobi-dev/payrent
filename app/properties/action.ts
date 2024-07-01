@@ -4,6 +4,7 @@ import { auth } from "@clerk/nextjs/server";
 import { prisma } from "@/lib/utils";
 import { revalidatePath } from "next/cache";
 import { Properties } from "@/types/types";
+import { validateRentalPlan, validateSalePlan } from "@/lib/utils";
 
 export async function likeProperty(propertyId: Properties["id"]) {
   try {
@@ -55,8 +56,16 @@ export async function getPropertyDetails(propertyId: Properties["id"]) {
       include: {
         images: true,
         Loan: true,
-        Rental: true,
-        Sale: true,
+        Rental: {
+          include: {
+            Invoice: true,
+          },
+        },
+        Sale: {
+          include: {
+            Invoice: true,
+          },
+        },
         Like: true,
       },
     });
@@ -72,6 +81,14 @@ export async function getPropertyDetails(propertyId: Properties["id"]) {
       isLikedByCurrentUser,
       images: property.images.map((img) => img.url),
       propertyType: property.propertyType as Properties["propertyType"],
+      Rental: property.Rental.map((rental) => ({
+        ...rental,
+        plan: validateRentalPlan(rental.plan),
+      })),
+      Sale: property.Sale.map((sale) => ({
+        ...sale,
+        plan: validateSalePlan(sale.plan),
+      })),
     };
     return propertyData;
   } catch (error) {

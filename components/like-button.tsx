@@ -50,11 +50,13 @@ export function LikeButton({
     <Button
       variant="ghost"
       size="icon"
-      className={`rounded-full ${className ?? ""}`}
+      className={`flex rounded-full items-center justify-center ${
+        className ?? ""
+      }`}
       onClick={handleLike}
     >
       <Heart
-        className={`w-6 h-6 text-orange-500 ${
+        className={`w-6 h-6 place-self-center text-orange-500 ${
           isLiked ? "fill-orange-500" : ""
         }`}
       />

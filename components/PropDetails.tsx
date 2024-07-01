@@ -4,8 +4,10 @@ import { Properties } from "@/types/types";
 import { Button } from "./ui/button";
 import Image from "next/image";
 import { LikeButton } from "./like-button";
-import { Bath, Bed, MapPin } from "lucide-react";
+import { Bath, Bed, Leaf, MapPin, Option, Ruler } from "lucide-react";
 import { ImageDialog } from "./image-dialog";
+import { SaleCard } from "./sale-card";
+import { RentCard } from "./rent-card";
 
 export default function PropDetails({ property }: { property: Properties }) {
   return (
@@ -55,18 +57,14 @@ export default function PropDetails({ property }: { property: Properties }) {
             <div className="text-muted-foreground">{property.description}</div>
             <div className="flex items-center gap-4">
               <Button size="lg">Schedule a Tour</Button>
-              <Button
-                variant="outline"
-                size="lg"
-                className="flex items-center justify-center gap-2"
-              >
+              <div className="flex items-center justify-center gap-2 border-gray-700 border px-2 py-1 rounded-md">
                 <LikeButton
                   propertyId={property.id}
                   initialLike={property.isLikedByCurrentUser}
                   className="inline"
                 />
                 <span className="inline">Save</span>
-              </Button>
+              </div>
             </div>
           </div>
         </section>
@@ -75,6 +73,80 @@ export default function PropDetails({ property }: { property: Properties }) {
             Gallery
           </h2>
           <ImageDialog images={property.images} />
+        </section>
+        <section className="mt-8 sm:mt-12 md:mt-16">
+          <h2 className="text-2xl sm:text-3xl font-bold mb-4 sm:mb-6">
+            Property Details
+          </h2>
+          <div className="grid md:grid-cols-2 gap-6 sm:gap-8">
+            <div className="grid gap-4 sm:gap-6">
+              <div className="flex items-center gap-2">
+                <Bed className="w-6 h-6 text-primary" />
+                <div>
+                  <div className="font-medium">Bedrooms</div>
+                  <div className="text-muted-foreground">
+                    {property.bedrooms}
+                  </div>
+                </div>
+              </div>
+              <div className="flex items-center gap-2">
+                <Bath className="w-6 h-6 text-primary" />
+                <div>
+                  <div className="font-medium">Bathrooms</div>
+                  <div className="text-muted-foreground">
+                    {property.bathrooms}
+                  </div>
+                </div>
+              </div>
+              <div className="flex items-center gap-2">
+                <Ruler className="w-6 h-6 text-primary" />
+                <div>
+                  <div className="font-medium">Square Feet</div>
+                  <div className="text-muted-foreground">
+                    {property.squareFeet} sq ft
+                  </div>
+                </div>
+              </div>
+              <div className="flex items-center gap-2">
+                <Option className="w-6 h-6 text-primary" />
+                <div>
+                  <div className="font-medium">Lot Size</div>
+                  <div className="text-muted-foreground">
+                    {property.lotSize} acres
+                  </div>
+                </div>
+              </div>
+              <div className="flex items-center gap-2">
+                <Leaf className="w-6 h-6 text-primary" />
+                <div>
+                  <div className="font-medium">Lot Type</div>
+                  <div className="text-muted-foreground">
+                    {property.propertyType}
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+        <section className="mt-8 sm:mt-12 md:mt-16">
+          <h2 className="text-2xl sm;text-3xl font-bold mb-4 sm:mb-6">
+            Property Description
+          </h2>
+          <div className="prose max-w-none">{property.description}</div>
+        </section>
+        <section className="mt-8 sm:mt-12 md:mt-16">
+          <h2 className="text-2xl sm:text-3xl font-bold mb-4 sm:mb-6">
+            Pricing and Availability
+          </h2>
+          <div className="grid md:grid-cols-2 gap-6 sm:gap-8">
+            {property.isForSale ? (
+              <SaleCard price={property.salePrice} />
+            ) : property.isForRent ? (
+              <RentCard price={property.rentPrice} />
+            ) : (
+              <div>Error!</div>
+            )}
+          </div>
         </section>
       </>
     </div>

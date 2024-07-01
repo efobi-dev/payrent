@@ -11,7 +11,7 @@ import { cn } from "@/lib/utils";
 import "./globals.css";
 
 const manrope = localFont({
-  src: "../font/manrope.ttf",
+  src: "./assets/manrope.ttf",
 });
 
 export const metadata: Metadata = {
