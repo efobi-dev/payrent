@@ -16,7 +16,7 @@ import {
   SheetTrigger,
 } from "@/components/ui/sheet";
 import { buttonVariants } from "./ui/button";
-import { Menu } from "lucide-react";
+import { Menu, SquareArrowOutUpRight } from "lucide-react";
 import ModeToggle from "./ThemeToggle";
 import Link from "next/link";
 
@@ -26,11 +26,15 @@ const routeList = [
     label: "Blog",
   },
   {
-    href: "/login",
-    label: "Login",
+    href: "#testimonials",
+    label: "Testimonials",
   },
   {
-    href: "/roadmap",
+    href: "#faq",
+    label: "FAQ",
+  },
+  {
+    href: "#/roadmap",
     label: "Roadmap",
   },
 ];
@@ -51,8 +55,8 @@ export const Navbar = () => {
               <Image
                 src="/payrent-logo.png"
                 alt="payrent logo"
-                width={50}
-                height={50}
+                width={70}
+                height={70}
               />
             </a>
           </NavigationMenuItem>
@@ -76,8 +80,8 @@ export const Navbar = () => {
                     <Image
                       src="/payrent-logo.png"
                       alt="PayRent logo"
-                      width={50}
-                      height={50}
+                      width={70}
+                      height={70}
                     />
                   </SheetTitle>
                 </SheetHeader>
@@ -94,10 +98,18 @@ export const Navbar = () => {
                     </a>
                   ))}
                   <Button
-                    className="bg-orange-500 text-white hover:bg-orange-600 dark:bg-orange-500 dark:text-gray-900 dark:hover:bg-orange-600"
-                    variant="outline"
+                    className="flex items-center justify-center space-x-1"
+                    size={"lg"}
                   >
-                    <Link href="mailto:sales@payrentng.com">Contact Us</Link>
+                    <Link
+                      href="https://web.payrentng.com"
+                      target="_blank"
+                      rel="noreferrer noopener"
+                      className="font-bold text-xl"
+                    >
+                      Get Started
+                    </Link>
+                    <SquareArrowOutUpRight />
                   </Button>
                 </nav>
               </SheetContent>
@@ -121,10 +133,18 @@ export const Navbar = () => {
           </nav>
           <div className="hidden md:flex gap-2">
             <Button
-              className="bg-orange-500 text-white hover:bg-orange-600 dark:bg-orange-500 dark:text-gray-900 dark:hover:bg-orange-600"
-              variant="outline"
+              className="flex items-center justify-center space-x-1"
+              size={"lg"}
             >
-              <Link href="mailto:sales@payrentng.com">Contact Us</Link>
+              <Link
+                href="https://web.payrentng.com"
+                target="_blank"
+                rel="noreferrer noopener"
+                className="font-bold text-xl"
+              >
+                Get Started
+              </Link>
+              <SquareArrowOutUpRight />
             </Button>
             <ModeToggle />
           </div>

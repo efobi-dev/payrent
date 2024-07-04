@@ -1,6 +1,6 @@
 import HeroSection from "@/components/HeroSection";
-import Sponsors from "@/components/Sponsors";
 import BlogSection from "@/components/BlogSection";
+import Packages from "@/components/Packages";
 import { CTASection } from "@/components/CTASection";
 import { Testimonials } from "@/components/Testimonials";
 import { Products } from "@/components/ProductSection";
@@ -9,15 +9,16 @@ import { Metadata } from "next";
 import { Footer } from "@/components/Footer";
 
 export const metadata: Metadata = {
-  title: "Home",
-  description: "PayRent NG Home Page",
+  title: "PayRent NG",
+  description:
+    "Welcome to PayRent, your one stop  property management service.",
 };
 
 export default function Page() {
   return (
     <main className="flex-1">
       <HeroSection />
-      <Sponsors />
+      <Packages />
       <Products />
       <BlogSection />
       <CTASection />

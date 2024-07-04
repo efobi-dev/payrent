@@ -25,7 +25,13 @@ export const CTASection = () => {
 
         <div className="space-y-4 lg:col-start-2">
           <Button className="w-full md:mr-4 md:w-auto">
-            <Link href="https://web.payrentng.com">Get Started</Link>
+            <Link
+              href="https://web.payrentng.com"
+              target="_blank"
+              rel="noreferrer noopener"
+            >
+              Get Started
+            </Link>
           </Button>
           <Button variant="outline" className="w-full md:w-auto">
             <Link href="mailto:sales@payrentng.com">Contact Us</Link>

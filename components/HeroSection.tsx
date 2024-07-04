@@ -13,8 +13,10 @@ export default function HeroSection() {
           <div className="flex flex-col justify-center space-y-4">
             <div className="space-y-2">
               <div className="text-3xl font-bold sm:text-5xl xl:text-6xl/none">
-                <h1 className="inline">Experience The Ease To </h1>
-                <TypedText />
+                <h1 className="inline sm:block">Experience The Ease</h1>
+                <div className="block sm:inline">
+                  To{""} <TypedText />
+                </div>
               </div>
               <p className="max-w-[600px] text-gray-500 md:text-xl dark:text-gray-400">
                 At Payrent, we know that shelter is an important responsibility
@@ -23,10 +25,16 @@ export default function HeroSection() {
             </div>
             <div className="flex flex-col gap-2 min-[400px]:flex-row">
               <Button>
-                <Link href="https://web.payrentng.com">Become A Member</Link>
+                <Link
+                  href="https://web.payrent.ng"
+                  target="_blank"
+                  rel="noreferrer noopener"
+                >
+                  Become A Member
+                </Link>
               </Button>
               <Button variant="outline">
-                <Link href="/packages">Get More Information</Link>
+                <Link href="mailto:sales@payrentng.com">Book A Demo</Link>
               </Button>
             </div>
           </div>

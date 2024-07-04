@@ -2,14 +2,13 @@ import type { Metadata } from "next";
 import { Analytics } from "@vercel/analytics/react";
 import { Navbar } from "@/components/NavBar";
 import { ThemeProvider } from "@/lib/providers";
-import { Manrope as FontSans } from "next/font/google";
+import localFont from "next/font/local";
 import { ScrollToTop } from "@/components/ScrollToTop";
 import { cn } from "@/lib/utils";
 import "./globals.css";
 
-const fontSans = FontSans({
-  subsets: ["latin"],
-  variable: "--font-sans",
+const manrope = localFont({
+  src: "./assets/manrope.ttf",
 });
 
 export const metadata: Metadata = {
@@ -32,7 +31,7 @@ export default function RootLayout({
       <body
         className={cn(
           "flex min-h-[100dvh] flex-col bg-background",
-          fontSans.variable
+          manrope.className
         )}
       >
         <ThemeProvider
