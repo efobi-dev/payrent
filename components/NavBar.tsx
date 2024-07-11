@@ -16,10 +16,9 @@ import {
   SheetTrigger,
 } from "@/components/ui/sheet";
 import { buttonVariants } from "./ui/button";
-import { Menu } from "lucide-react";
+import { Menu, SquareArrowOutUpRight } from "lucide-react";
 import ModeToggle from "./ThemeToggle";
 import Link from "next/link";
-import { UserButton, useUser } from "@clerk/nextjs";
 
 const routeList = [
   {
@@ -27,18 +26,21 @@ const routeList = [
     label: "Blog",
   },
   {
-    href: "/properties",
-    label: "Properties",
+    href: "#testimonials",
+    label: "Testimonials",
   },
   {
-    href: "/roadmap",
+    href: "#faq",
+    label: "FAQ",
+  },
+  {
+    href: "#/roadmap",
     label: "Roadmap",
   },
 ];
 
 export const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const { user } = useUser();
 
   return (
     <header className="sticky border-b-[1px] top-0 z-40 w-full bg-white dark:border-b-slate-700 dark:bg-background">
@@ -61,12 +63,8 @@ export const Navbar = () => {
 
           {/* mobile */}
           <span className="flex md:hidden">
-            {user && (
-              <div className="px-2 flex items-center">
-                <UserButton />
-              </div>
-            )}
             <ModeToggle />
+
             <Sheet open={isOpen} onOpenChange={setIsOpen}>
               <SheetTrigger className="px-2">
                 <Menu
@@ -82,8 +80,8 @@ export const Navbar = () => {
                     <Image
                       src="/payrent-logo.png"
                       alt="PayRent logo"
-                      width={50}
-                      height={50}
+                      width={70}
+                      height={70}
                     />
                   </SheetTitle>
                 </SheetHeader>
@@ -100,10 +98,18 @@ export const Navbar = () => {
                     </a>
                   ))}
                   <Button
-                    className="bg-orange-500 text-white hover:bg-orange-600 dark:bg-orange-500 dark:text-gray-900 dark:hover:bg-orange-600"
-                    variant="outline"
+                    className="flex items-center justify-center space-x-1"
+                    size={"lg"}
                   >
-                    <Link href="mailto:sales@payrentng.com">Contact Us</Link>
+                    <Link
+                      href="https://web.payrentng.com"
+                      target="_blank"
+                      rel="noreferrer noopener"
+                      className="font-bold text-xl"
+                    >
+                      Get Started
+                    </Link>
+                    <SquareArrowOutUpRight />
                   </Button>
                 </nav>
               </SheetContent>
@@ -126,16 +132,20 @@ export const Navbar = () => {
             ))}
           </nav>
           <div className="hidden md:flex gap-2">
-            {user ? (
-              <UserButton />
-            ) : (
-              <Button
-                className="bg-orange-500 text-white hover:bg-orange-600 dark:bg-orange-500 dark:text-gray-900 dark:hover:bg-orange-600"
-                variant="outline"
+            <Button
+              className="flex items-center justify-center space-x-1"
+              size={"lg"}
+            >
+              <Link
+                href="https://web.payrentng.com"
+                target="_blank"
+                rel="noreferrer noopener"
+                className="font-bold text-xl"
               >
-                <Link href="/sign-up">Sign Up</Link>
-              </Button>
-            )}
+                Get Started
+              </Link>
+              <SquareArrowOutUpRight />
+            </Button>
             <ModeToggle />
           </div>
         </NavigationMenuList>

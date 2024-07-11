@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { Button } from "./ui/button";
+import { SquareArrowOutUpRight } from "lucide-react";
 
 export default function Packages() {
   return (
@@ -26,8 +27,19 @@ export default function Packages() {
               covered.
             </p>
           </div>
-          <Button>
-            <Link href="/properties">Join us</Link>
+          <Button
+            className="flex items-center justify-center space-x-1"
+            size={"lg"}
+          >
+            <Link
+              href="https://web.payrentng.com"
+              target="_blank"
+              rel="noreferrer noopener"
+              className="font-bold text-xl"
+            >
+              Join us
+            </Link>
+            <SquareArrowOutUpRight />
           </Button>
         </div>
       </div>

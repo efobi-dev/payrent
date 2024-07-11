@@ -8,8 +8,9 @@ import { FAQ } from "@/components/FAQ";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Home",
-  description: "PayRent NG Home Page",
+  title: "PayRent NG",
+  description:
+    "Welcome to PayRent, your one stop  property management service.",
 };
 
 export default function Page() {

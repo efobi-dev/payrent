@@ -4,9 +4,6 @@ import { Navbar } from "@/components/NavBar";
 import { ThemeProvider } from "@/lib/providers";
 import localFont from "next/font/local";
 import { ScrollToTop } from "@/components/ScrollToTop";
-import { ClerkProvider } from "@clerk/nextjs";
-import { Toaster } from "@/components/ui/sonner";
-import { Footer } from "@/components/Footer";
 import { cn } from "@/lib/utils";
 import "./globals.css";
 
@@ -22,7 +19,7 @@ export const metadata: Metadata = {
   description: "One Stop Real Estate Solution Provider in Nigeria",
   metadataBase: new URL("https://www.payrentng.com"),
   openGraph: {
-    images: ["/og-image.png"],
+    images: "/opengraph.jpg",
   },
 };
 
@@ -30,29 +27,25 @@ export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <ClerkProvider>
-      <html lang="en" suppressHydrationWarning>
-        <body
-          className={cn(
-            "flex min-h-[100dvh] flex-col bg-background",
-            manrope.className
-          )}
+    <html lang="en" suppressHydrationWarning>
+      <body
+        className={cn(
+          "flex min-h-[100dvh] flex-col bg-background",
+          manrope.className
+        )}
+      >
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="system"
+          enableSystem
+          disableTransitionOnChange
         >
-          <ThemeProvider
-            attribute="class"
-            defaultTheme="system"
-            enableSystem
-            disableTransitionOnChange
-          >
-            <Analytics />
-            <Navbar />
-            {children}
-            <ScrollToTop />
-            <Toaster />
-            <Footer />
-          </ThemeProvider>
-        </body>
-      </html>
-    </ClerkProvider>
+          <Analytics />
+          <Navbar />
+          {children}
+          <ScrollToTop />
+        </ThemeProvider>
+      </body>
+    </html>
   );
 }

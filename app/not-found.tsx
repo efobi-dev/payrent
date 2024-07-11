@@ -2,8 +2,6 @@ import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { HomeIcon } from "lucide-react";
 
-export const runtime = "edge";
-
 export default function NotFound() {
   return (
     <section className="flex flex-col items-center justify-center h-[100dvh] px-4 mdLpx-6">
