@@ -19,7 +19,7 @@ export default function HeroSection() {
                 </div>
               </div>
               <p className="max-w-[600px] text-gray-500 md:text-xl dark:text-gray-400">
-                At Payrent, we know that shelter is an important responsibility
+                At PayRent, we know that shelter is an important responsibility
                 for every home. Not to worry, we have worked it out for you.
               </p>
             </div>
