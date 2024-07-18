@@ -26,7 +26,7 @@ export default function HeroSection() {
             <div className="flex flex-col gap-2 min-[400px]:flex-row">
               <Button>
                 <Link
-                  href="https://web.payrent.ng"
+                  href="https://web.payrentng.com"
                   target="_blank"
                   rel="noreferrer noopener"
                 >
