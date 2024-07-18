@@ -588,7 +588,7 @@ export type PostQueryResult = {
   } | null;
 } | null;
 
-// Source: app/blog/posts/[slug]/page.tsx
+// Source: app/(blog)/posts/[slug]/page.tsx
 // Variable: postSlugs
 // Query: *[_type == "post"]{slug}
 export type PostSlugsResult = Array<{
