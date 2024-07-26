@@ -23,18 +23,15 @@ export default function HeroSection() {
                 for every home. Not to worry, we have worked it out for you.
               </p>
             </div>
-            <div className="flex flex-col gap-2 min-[400px]:flex-row">
+            <div className="flex">
               <Button>
                 <Link
-                  href="https://web.payrentng.com"
+                  href="https://web.payrentng.com/sign-in"
                   target="_blank"
                   rel="noreferrer noopener"
                 >
                   Become A Member
                 </Link>
-              </Button>
-              <Button variant="outline">
-                <Link href="mailto:sales@payrentng.com">Book A Demo</Link>
               </Button>
             </div>
           </div>

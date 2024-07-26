@@ -6,47 +6,47 @@ import Marquee from "./magicui/marquee";
 
 const testimonials = [
   {
-    image: "https://i.pravatar.cc/150?img=49",
-    name: "Sarah Johnson",
-    fallback: "SJ",
-    userName: "@sarah_j",
+    image: "https://images.unsplash.com/photo-1620932934088-fbdb2920e484",
+    name: "Gbeminiyi Tobiloba",
+    fallback: "GT",
+    userName: "@niyi_t",
     comment:
       "PayRent has revolutionized the way I approach housing. The platform is user-friendly and incredibly efficient, making the entire process of finding and securing a rental property a breeze.",
   },
   {
-    image: "https://i.pravatar.cc/150?img=33",
-    name: "Michael Thompson",
-    fallback: "MT",
-    userName: "@mike_thompson",
+    image: "https://images.unsplash.com/photo-1615453261261-77494754424e",
+    name: "Chidinma Obiageli",
+    fallback: "CO",
+    userName: "@obiageli_chidinma",
     comment:
       "As a first-time homebuyer, I was overwhelmed by the process. PayRent's comprehensive resources and expert guidance made the journey seamless. Their transparency and attention to detail truly set them apart.",
   },
   {
     image: "https://i.pravatar.cc/150?img=22",
-    name: "Emily Davis",
-    fallback: "ED",
-    userName: "@emily_davis",
+    name: "Aremu Atanda",
+    fallback: "AA",
+    userName: "@aremu_daboss",
     comment:
       "Listing my property on PayRent was a game-changer. Their platform connected me with reliable tenants quickly, and the streamlined management tools made it effortless to oversee my investment.",
   },
   {
-    image: "https://i.pravatar.cc/150?img=51",
-    name: "David Wilson",
-    fallback: "DJ",
-    userName: "@david_wilson",
+    image: "https://images.unsplash.com/photo-1608500133806-676bd5e0153f",
+    name: "Aminat Bello",
+    fallback: "AB",
+    userName: "@ab",
     comment:
       "I can't recommend PayRent enough. Their commitment to exceptional service and innovative solutions has made navigating the real estate market a truly enjoyable experience.",
   },
   {
-    image: "https://i.pravatar.cc/150?img=36",
-    name: "Sophia Martinez",
+    image: "https://images.unsplash.com/photo-1672675225389-4d7b6f231f5b",
+    name: "Oluwatosin Gbadamosi",
     fallback: "SM",
-    userName: "@sophia_martinez",
+    userName: "@tosin_gbada",
     comment:
       "PayRent's platform is intuitive and user-friendly. As a first-time landlord, their resources and support have been invaluable in managing my rental property efficiently.",
   },
   {
-    image: "https://i.pravatar.cc/150?img=45",
+    image: "https://images.unsplash.com/photo-1589695790573-4c442170101c",
     name: "Liam Johnson",
     fallback: "LJ",
     userName: "@liam_johnson",
@@ -54,18 +54,18 @@ const testimonials = [
       "Switching to PayRent was the best decision I made for my rental business. The tenant screening process is thorough, and their automated rent collection has saved me so much time.",
   },
   {
-    image: "https://i.pravatar.cc/150?img=30",
-    name: "Ava Brown",
-    fallback: "AB",
-    userName: "@ava_brown",
+    image: "https://images.unsplash.com/photo-1645395375692-502558949baa",
+    name: "Chisom Efe",
+    fallback: "CE",
+    userName: "@chisom_efe",
     comment:
       "PayRent has revolutionized how I manage my properties. The seamless integration of all the necessary tools in one platform has made it easier than ever to keep track of everything.",
   },
   {
-    image: "https://i.pravatar.cc/150?img=27",
-    name: "Mason Davis",
+    image: "https://images.unsplash.com/photo-1597450766109-d8d60d1fc044",
+    name: "Ayebanua Mason",
     fallback: "MD",
-    userName: "@mason_davis",
+    userName: "@ayebanua_mason",
     comment:
       "The support team at PayRent is outstanding. They are always ready to assist and provide solutions to any issues I encounter. Highly recommend their services!",
   },

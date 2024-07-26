@@ -9,7 +9,7 @@ import {
 } from "./ui/card";
 import { Badge } from "./ui/badge";
 
-const roadmap = [
+const packages = [
   {
     title: "Website Redesign",
     description: "A better performant and accessible website",
@@ -54,7 +54,7 @@ export default function Roadmap() {
               </p>
             </div>
             <div className="grid gap-6">
-              {roadmap.map((item, index) => (
+              {packages.map((item, index) => (
                 <Card key={index}>
                   <CardHeader>
                     <CardTitle>{item.title}</CardTitle>

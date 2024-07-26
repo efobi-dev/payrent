@@ -1,6 +1,7 @@
 import HeroSection from "@/components/HeroSection";
 import BlogSection from "@/components/BlogSection";
 import Packages from "@/components/Packages";
+import { Footer } from "@/components/Footer";
 import { CTASection } from "@/components/CTASection";
 import { Testimonials } from "@/components/Testimonials";
 import { Products } from "@/components/ProductSection";
@@ -17,12 +18,13 @@ export default function Page() {
   return (
     <main className="flex-1">
       <HeroSection />
-      <Packages />
       <Products />
+      <Packages />
       <BlogSection />
       <CTASection />
       <Testimonials />
       <FAQ />
+      <Footer />
     </main>
   );
 }

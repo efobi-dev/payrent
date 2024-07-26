@@ -34,7 +34,7 @@ const routeList = [
     label: "FAQ",
   },
   {
-    href: "#/roadmap",
+    href: "#/packages",
     label: "Roadmap",
   },
 ];
@@ -102,7 +102,7 @@ export const Navbar = () => {
                     size={"lg"}
                   >
                     <Link
-                      href="https://web.payrentng.com"
+                      href="https://web.payrentng.com/sign-in"
                       target="_blank"
                       rel="noreferrer noopener"
                       className="font-bold text-xl"
@@ -137,7 +137,7 @@ export const Navbar = () => {
               size={"lg"}
             >
               <Link
-                href="https://web.payrentng.com"
+                href="https://web.payrentng.com/sign-in"
                 target="_blank"
                 rel="noreferrer noopener"
                 className="font-bold text-xl"

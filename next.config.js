@@ -9,11 +9,7 @@ module.exports = {
       {
         hostname: "*.unsplash.com",
       },
-      {
-        hostname: 'img.clerk.com'
-      },
-      {hostname: 'loremflickr.com'}, {hostname: 'picsum.photos'}
-    ]
+    ],
   },
   logging: {
     fetches: { fullUrl: false },
