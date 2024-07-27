@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import { Analytics } from "@vercel/analytics/react";
-import { Navbar } from "@/components/NavBar";
 import { ThemeProvider } from "@/lib/providers";
 import localFont from "next/font/local";
 import { ScrollToTop } from "@/components/ScrollToTop";
@@ -41,7 +40,6 @@ export default function RootLayout({
           disableTransitionOnChange
         >
           <Analytics />
-          <Navbar />
           {children}
           <ScrollToTop />
         </ThemeProvider>

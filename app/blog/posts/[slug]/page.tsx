@@ -1,14 +1,14 @@
-import type {Metadata, ResolvingMetadata} from "next";
-import {groq, type PortableTextBlock} from "next-sanity";
+import type { Metadata, ResolvingMetadata } from "next";
+import { groq, type PortableTextBlock } from "next-sanity";
 import Link from "next/link";
-import {notFound} from "next/navigation";
-import {Suspense} from "react";
+import { notFound } from "next/navigation";
+import { Suspense } from "react";
 
-import Avatar from "../../../../components/avatar";
-import CoverImage from "../../../../components/cover-image";
-import DateComponent from "../../../../components/date";
-import MoreStories from "../../../../components/more-stories";
-import PortableText from "../../../../components/portable-text";
+import Avatar from "@/@/components/avatar";
+import CoverImage from "@/@/components/cover-image";
+import DateComponent from "@/@/components/date";
+import MoreStories from "@/@/components/more-stories";
+import PortableText from "@/@/components/portable-text";
 
 import type {
   PostQueryResult,
@@ -16,12 +16,12 @@ import type {
   SettingsQueryResult,
 } from "@/sanity.types";
 import * as demo from "@/sanity/lib/demo";
-import {sanityFetch} from "@/sanity/lib/fetch";
-import {postQuery, settingsQuery} from "@/sanity/lib/queries";
-import {resolveOpenGraphImage} from "@/sanity/lib/utils";
+import { sanityFetch } from "@/sanity/lib/fetch";
+import { postQuery, settingsQuery } from "@/sanity/lib/queries";
+import { resolveOpenGraphImage } from "@/sanity/lib/utils";
 
 type Props = {
-  params: {slug: string};
+  params: { slug: string };
 };
 
 const postSlugs = groq`*[_type == "post"]{slug}`;
@@ -32,11 +32,11 @@ export async function generateStaticParams() {
     perspective: "published",
     stega: false,
   });
-  return params.map(({slug}) => ({slug: slug?.current}));
+  return params.map(({ slug }) => ({ slug: slug?.current }));
 }
 
 export async function generateMetadata(
-  {params}: Props,
+  { params }: Props,
   parent: ResolvingMetadata
 ): Promise<Metadata> {
   const post = await sanityFetch<PostQueryResult>({
@@ -48,7 +48,7 @@ export async function generateMetadata(
   const ogImage = resolveOpenGraphImage(post?.coverImage);
 
   return {
-    authors: post?.author?.name ? [{name: post?.author?.name}] : [],
+    authors: post?.author?.name ? [{ name: post?.author?.name }] : [],
     title: post?.title,
     description: post?.excerpt,
     openGraph: {
@@ -57,7 +57,7 @@ export async function generateMetadata(
   } satisfies Metadata;
 }
 
-export default async function PostPage({params}: Props) {
+export default async function PostPage({ params }: Props) {
   const [post, settings] = await Promise.all([
     sanityFetch<PostQueryResult>({
       query: postQuery,

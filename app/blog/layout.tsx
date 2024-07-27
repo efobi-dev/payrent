@@ -1,19 +1,23 @@
 import "../globals.css";
 
-import {SpeedInsights} from "@vercel/speed-insights/next";
-import type {Metadata} from "next";
-import {VisualEditing, toPlainText, type PortableTextBlock} from "next-sanity";
-import {draftMode} from "next/headers";
-import {Suspense} from "react";
+import { SpeedInsights } from "@vercel/speed-insights/next";
+import type { Metadata } from "next";
+import {
+  VisualEditing,
+  toPlainText,
+  type PortableTextBlock,
+} from "next-sanity";
+import { draftMode } from "next/headers";
+import { Suspense } from "react";
 
-import AlertBanner from "../../components/alert-banner";
-import PortableText from "../../components/portable-text";
+import AlertBanner from "@/components/alert-banner";
+import PortableText from "@/components/portable-text";
 
-import type {SettingsQueryResult} from "@/sanity.types";
+import type { SettingsQueryResult } from "@/sanity.types";
 import * as demo from "@/sanity/lib/demo";
-import {sanityFetch} from "@/sanity/lib/fetch";
-import {settingsQuery} from "@/sanity/lib/queries";
-import {resolveOpenGraphImage} from "@/sanity/lib/utils";
+import { sanityFetch } from "@/sanity/lib/fetch";
+import { settingsQuery } from "@/sanity/lib/queries";
+import { resolveOpenGraphImage } from "@/sanity/lib/utils";
 
 export async function generateMetadata(): Promise<Metadata> {
   const settings = await sanityFetch<SettingsQueryResult>({
@@ -86,7 +90,11 @@ async function Footer() {
   );
 }
 
-export default function RootLayout({children}: {children: React.ReactNode}) {
+export default function RootLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
   return (
     <html lang="en">
       <body>
