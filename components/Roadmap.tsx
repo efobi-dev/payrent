@@ -36,7 +36,7 @@ const packages = [
     date: "Q3  2024",
   },
 ];
-export default function Roadmap() {
+export default function Packages() {
   return (
     <main className="flex-1">
       <section className="w-full py-12 mdy-24 lg:py-32">
@@ -44,10 +44,10 @@ export default function Roadmap() {
           <div className="grid gap-10 sm:px-10 md:gap-16 md:grid-cols-2">
             <div className="space-y-4">
               <div className="inline-block rounded-lg ng-gray-100 px-3 py-1 text-sm dark:bg-gray-700">
-                Roadmap
+                Packages
               </div>
               <h2 className="lg:leading-tighter text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl xl:text-[3.4rem] 2xl:text-[3.75rem]">
-                Our Product Roadmap
+                Our Product Packages
               </h2>
               <p className="text-gray-500 dark:text-gray-400">
                 Check out our upcoming features and milestones.

@@ -41,7 +41,7 @@
     "embla-carousel-autoplay": "^8.1.6",
     "embla-carousel-react": "^8.1.6",
     "lucide-react": "^0.378.0",
-    "next": "latest",
+    "next": "14.2.5",
     "next-sanity": "9.0.10",
     "next-themes": "^0.3.0",
     "postcss": "^8.4.39",
@@ -61,8 +61,8 @@
     "typescript": "5.4.5"
   },
   "devDependencies": {
-    "@next/env": "latest",
+    "@next/env": "14.2.5",
     "eslint": "^8.57.0",
-    "eslint-config-next": "latest"
+    "eslint-config-next": "14.2.5"
   }
 }

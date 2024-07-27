@@ -34,8 +34,8 @@ const routeList = [
     label: "FAQ",
   },
   {
-    href: "#/packages",
-    label: "Roadmap",
+    href: "/packages",
+    label: "Packages",
   },
 ];
 
