@@ -1,6 +1,8 @@
 import HeroSection from "@/components/HeroSection";
 import BlogSection from "@/components/BlogSection";
 import Packages from "@/components/Packages";
+import { Navbar } from "@/components/NavBar";
+import { Footer } from "@/components/Footer";
 import { CTASection } from "@/components/CTASection";
 import { Testimonials } from "@/components/Testimonials";
 import { Products } from "@/components/ProductSection";
@@ -16,13 +18,15 @@ export const metadata: Metadata = {
 export default function Page() {
   return (
     <main className="flex-1">
+      <Navbar />
       <HeroSection />
-      <Packages />
       <Products />
+      <Packages />
       <BlogSection />
       <CTASection />
       <Testimonials />
       <FAQ />
+      <Footer />
     </main>
   );
 }

@@ -1,12 +1,12 @@
 import Link from "next/link";
 import { Suspense } from "react";
 
-import Avatar from "../../components/avatar";
-import CoverImage from "../../components/cover-image";
-import DateComponent from "../../components/date";
-import MoreStories from "../../components/more-stories";
-import Onboarding from "../../components/onboarding";
-import PortableText from "../../components/portable-text";
+import Avatar from "@/components/avatar";
+import CoverImage from "@/components/cover-image";
+import DateComponent from "@/components/date";
+import MoreStories from "@/components/more-stories";
+import Onboarding from "@/components/onboarding";
+import PortableText from "@/components/portable-text";
 
 import type { HeroQueryResult, SettingsQueryResult } from "@/sanity.types";
 import * as demo from "@/sanity/lib/demo";
