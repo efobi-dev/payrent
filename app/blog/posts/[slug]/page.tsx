@@ -4,11 +4,11 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { Suspense } from "react";
 
-import Avatar from "@/@/components/avatar";
-import CoverImage from "@/@/components/cover-image";
-import DateComponent from "@/@/components/date";
-import MoreStories from "@/@/components/more-stories";
-import PortableText from "@/@/components/portable-text";
+import Avatar from "@/components/avatar";
+import CoverImage from "@/components/cover-image";
+import DateComponent from "@/components/date";
+import MoreStories from "@/components/more-stories";
+import PortableText from "@/components/portable-text";
 
 import type {
   PostQueryResult,
